@@ -1,3 +1,3 @@
-import join from 'lodash/join'
+import join from "lodash/join";
 
-console.log(join(['hello', 'there']))
+console.log(join(["hello", "there"]));
