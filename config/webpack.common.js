@@ -1,16 +1,19 @@
 const path = require('path')
+
 const PnpWebpackPlugin = require('pnp-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const rootPath = path.resolve(__dirname, '../')
+
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, '../src/index.ts'),
+    app: path.join(rootPath, 'src/index.ts'),
   },
 
   output: {
     filename: '[name].[contenthash:8].js',
-    path: path.resolve(__dirname, '../build'),
+    path: path.join(rootPath, 'build'),
   },
 
   resolve: {
@@ -30,6 +33,7 @@ module.exports = {
     new HtmlWebpackPlugin(
       {
         title: 'React 2048',
+        template: path.join(rootPath, 'assets/index.hbs'),
       }
     ),
   ],
