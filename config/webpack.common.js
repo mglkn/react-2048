@@ -1,5 +1,6 @@
 const path = require("path");
 
+const webpack = require("webpack");
 const PnpWebpackPlugin = require("pnp-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -7,12 +8,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const rootPath = path.resolve(__dirname, "../");
 
 module.exports = {
+  target: "web",
+
   entry: {
     app: path.join(rootPath, "src/index.tsx"),
   },
 
   output: {
-    filename: "[name].[contenthash:8].js",
+    filename: "[name].[hash:8].js",
     path: path.join(rootPath, "build"),
   },
 
@@ -30,6 +33,7 @@ module.exports = {
       title: "React 2048",
       template: path.join(rootPath, "assets/index.hbs"),
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 
   module: {
@@ -41,8 +45,6 @@ module.exports = {
       },
     ],
   },
-
-  devtool: "inline-source-map",
 
   optimization: {
     moduleIds: "hashed",

@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build": "webpack --config ./config/webpack.dev.js",
+    "dev": "webpack-dev-server --config ./config/webpack.dev.js",
     "format": "prettier --write src"
   },
   "dependencies": {
