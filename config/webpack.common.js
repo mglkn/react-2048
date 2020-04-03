@@ -1,41 +1,35 @@
-const path = require('path')
+const path = require("path");
 
-const PnpWebpackPlugin = require('pnp-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const PnpWebpackPlugin = require("pnp-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const rootPath = path.resolve(__dirname, '../')
+const rootPath = path.resolve(__dirname, "../");
 
 module.exports = {
   entry: {
-    app: path.join(rootPath, 'src/index.ts'),
+    app: path.join(rootPath, "src/index.tsx"),
   },
 
   output: {
-    filename: '[name].[contenthash:8].js',
-    path: path.join(rootPath, 'build'),
+    filename: "[name].[contenthash:8].js",
+    path: path.join(rootPath, "build"),
   },
 
   resolve: {
-    plugins: [
-      PnpWebpackPlugin,
-    ],
+    plugins: [PnpWebpackPlugin],
   },
 
   resolveLoader: {
-    plugins: [
-      PnpWebpackPlugin.moduleLoader(module),
-    ],
+    plugins: [PnpWebpackPlugin.moduleLoader(module)],
   },
 
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin(
-      {
-        title: 'React 2048',
-        template: path.join(rootPath, 'assets/index.hbs'),
-      }
-    ),
+    new HtmlWebpackPlugin({
+      title: "React 2048",
+      template: path.join(rootPath, "assets/index.hbs"),
+    }),
   ],
 
   module: {
@@ -43,28 +37,25 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: [
-          'ts-loader'
-        ],
-      }
-    ]
+        use: ["ts-loader"],
+      },
+    ],
   },
 
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
 
   optimization: {
-    moduleIds: 'hashed',
-    runtimeChunk: 'single',
+    moduleIds: "hashed",
+    runtimeChunk: "single",
     usedExports: true,
     splitChunks: {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        }
-      }
-    }
-  }
-
-}
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
+  },
+};
