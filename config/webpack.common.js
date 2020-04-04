@@ -21,8 +21,12 @@ module.exports = {
     publicPath: "",
   },
 
+  // resolve: {
+  //   plugins: [PnpWebpackPlugin],
+  // },
+
   resolve: {
-    plugins: [PnpWebpackPlugin],
+    extensions: [".tsx", ".ts", ".js", ".scss", ".css"],
   },
 
   resolveLoader: {
@@ -47,7 +51,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: [/\.test.tsx?$/, /node_modules/],
-        use: ["ts-loader"],
+        loader: "ts-loader",
       },
       {
         test: /\.(s*)css$/,
