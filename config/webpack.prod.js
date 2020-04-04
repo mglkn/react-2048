@@ -3,11 +3,21 @@ const common = require("./webpack.common");
 
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
+// const HtmlWebpackChangeAssetExtensionPlugin = require("html-webpack-change-assets-extension-plugin");
 
 module.exports = merge(common, {
   mode: "production",
 
-  plugins: [new CompressionWebpackPlugin()],
+  plugins: [
+    new CompressionWebpackPlugin({
+      algorithm: "gzip",
+      test: /\.(js|css)$/,
+      deleteOriginalAssets: false,
+      filename: "[path].gz[query]",
+    }),
+    // TODO: make .gz work!
+    // new HtmlWebpackChangeAssetExtensionPlugin(),
+  ],
 
   optimization: {
     minimizer: [

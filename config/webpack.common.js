@@ -17,6 +17,7 @@ module.exports = {
   output: {
     filename: "[name].[hash:8].js",
     path: path.join(rootPath, "build"),
+    publicPath: "",
   },
 
   resolve: {
@@ -27,11 +28,15 @@ module.exports = {
     plugins: [PnpWebpackPlugin.moduleLoader(module)],
   },
 
+  devtool: "inline-source-map",
+
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "React 2048",
       template: path.join(rootPath, "assets/index.hbs"),
+      // TODO: make .gz work!
+      // jsExtension: ".gz",
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],

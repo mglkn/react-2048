@@ -1979,6 +1979,11 @@ html-minifier-terser@^5.0.1:
     relateurl "^0.2.7"
     terser "^4.6.3"
 
+html-webpack-change-assets-extension-plugin@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/html-webpack-change-assets-extension-plugin/-/html-webpack-change-assets-extension-plugin-1.2.0.tgz#db4e6ce0d17e9ab11783b98e2ad2e6c3ae70dcbf"
+  integrity sha512-Dav8tcC0YQbSxhzspfZ+HmZEEpPf9LPX8vmTrm5W1UWlaQkHKUK890S9MmwA14krcUrAt2kkqyqJxIKAQr5mDA==
+
 html-webpack-plugin@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-4.0.4.tgz#90cdfb168094e93e047174d9baca098ec5540636"
