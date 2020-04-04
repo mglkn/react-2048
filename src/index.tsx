@@ -3,11 +3,12 @@ import "./root.scss";
 import React from "react";
 import { render } from "react-dom";
 
-import * as _ from "lodash";
+import App from "./ui/App/App";
 
-const App: React.FC = () => {
-  return <div> {_.join(["hello", "there", "!!!"])}</div>;
-  // return <div> Hello there!!! </div>;
-};
+const Root: React.FC = () => (
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-render(<App />, document.getElementById("root"));
+render(<Root />, document.getElementById("root"));
