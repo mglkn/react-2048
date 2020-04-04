@@ -9,7 +9,7 @@ type IBoardTile = {
 
 type IBoard = IBoardTile[];
 
-type IGameState = {
+export type IGameState = {
   board: IBoard;
   isGameOver: boolean;
   isWin: boolean;
@@ -23,7 +23,7 @@ export enum MoveDirection {
   RIGHT,
 }
 
-class GameLogicService {
+class GameLogic {
   static _currentId: number = 1;
   static generateId(): string {
     return (this._currentId++).toString();
@@ -45,6 +45,26 @@ class GameLogicService {
       isWin: false,
       score: 0,
     };
+  }
+
+  static gameStep(
+    currentState: IGameState,
+    moveDirection: MoveDirection
+  ): IGameState {
+    let state = currentState;
+
+    if (!this.canIMakeMove(currentState, moveDirection)) {
+      return this.checkGameOver(state);
+    }
+
+    state = this.move(state, moveDirection);
+
+    state = this.checkWin(state);
+    if (state.isWin) {
+      return state;
+    }
+
+    return this.addTile(state);
   }
 
   static addTile(gameState: IGameState): IGameState {
@@ -213,7 +233,7 @@ class GameLogicService {
   }
 
   static checkWin(state: IGameState): IGameState {
-    const isWin = state.board.map(({ value }) => value).includes(2048);
+    const isWin = state.board.filter(({ value }) => value === 2048).length > 0;
 
     return {
       ...state,
@@ -222,4 +242,4 @@ class GameLogicService {
   }
 }
 
-export default GameLogicService;
+export default GameLogic;

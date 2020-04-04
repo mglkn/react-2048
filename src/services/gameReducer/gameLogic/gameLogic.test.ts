@@ -1,27 +1,27 @@
-import GameLogicService, { MoveDirection } from "./gameLogicService";
+import GameLogic, { MoveDirection } from "./gameLogic";
 
 describe("Game logic service", () => {
   test("initState should init state", () => {
-    const initialState = GameLogicService.gameStateInit();
+    const initialState = GameLogic.gameStateInit();
 
     expect(initialState.isGameOver).toBe(false);
     expect(initialState.isWin).toBe(false);
     expect(initialState.score).toBe(0);
     expect(initialState.board.map(({ value }) => value)).toEqual(
-      GameLogicService._boardInit().map(({ value }) => value)
+      GameLogic._boardInit().map(({ value }) => value)
     );
   });
 
   test("addTile should add new tile", () => {
-    const initialState = GameLogicService.gameStateInit();
+    const initialState = GameLogic.gameStateInit();
 
-    const newState = GameLogicService.addTile(initialState);
+    const newState = GameLogic.addTile(initialState);
 
     expect(newState.board.filter(({ value }) => value === 2).length).toBe(1);
   });
 
   test("move: should shift tiles and merge with move UP", () => {
-    const initState = GameLogicService.gameStateInit();
+    const initState = GameLogic.gameStateInit();
 
     initState.board[4].value = 4;
     initState.board[8].value = 8;
@@ -30,7 +30,7 @@ describe("Game logic service", () => {
     initState.board[10].value = 4;
     initState.board[14].value = 4;
 
-    const resultState = GameLogicService.move(initState, MoveDirection.UP);
+    const resultState = GameLogic.move(initState, MoveDirection.UP);
 
     expect(resultState.board[0].value).toBe(4);
     expect(resultState.board[4].value).toBe(16);
@@ -41,7 +41,7 @@ describe("Game logic service", () => {
   });
 
   test("move: should shift tiles and merge with move DOWN", () => {
-    const initState = GameLogicService.gameStateInit();
+    const initState = GameLogic.gameStateInit();
 
     initState.board[4].value = 4;
     initState.board[8].value = 8;
@@ -50,7 +50,7 @@ describe("Game logic service", () => {
     initState.board[6].value = 4;
     initState.board[14].value = 4;
 
-    const resultState = GameLogicService.move(initState, MoveDirection.DOWN);
+    const resultState = GameLogic.move(initState, MoveDirection.DOWN);
 
     expect(resultState.board[8].value).toBe(4);
     expect(resultState.board[12].value).toBe(16);
@@ -61,7 +61,7 @@ describe("Game logic service", () => {
   });
 
   test("move: should shift tiles and merge with move RIGHT", () => {
-    const initState = GameLogicService.gameStateInit();
+    const initState = GameLogic.gameStateInit();
 
     initState.board[0].value = 16;
     initState.board[1].value = 16;
@@ -70,7 +70,7 @@ describe("Game logic service", () => {
     initState.board[8].value = 4;
     initState.board[10].value = 4;
 
-    const resultState = GameLogicService.move(initState, MoveDirection.RIGHT);
+    const resultState = GameLogic.move(initState, MoveDirection.RIGHT);
 
     expect(resultState.board[2].value).toBe(16);
     expect(resultState.board[3].value).toBe(32);
@@ -81,7 +81,7 @@ describe("Game logic service", () => {
   });
 
   test("move: should shift tiles and merge with move LEFT", () => {
-    const initState = GameLogicService.gameStateInit();
+    const initState = GameLogic.gameStateInit();
 
     initState.board[0].value = 8;
     initState.board[1].value = 8;
@@ -90,7 +90,7 @@ describe("Game logic service", () => {
     initState.board[8].value = 4;
     initState.board[10].value = 4;
 
-    const resultState = GameLogicService.move(initState, MoveDirection.LEFT);
+    const resultState = GameLogic.move(initState, MoveDirection.LEFT);
 
     expect(resultState.board[0].value).toBe(16);
     expect(resultState.board[1].value).toBe(16);
@@ -101,29 +101,21 @@ describe("Game logic service", () => {
   });
 
   test("canIMakeMove (not full board): should return false if i cant make move and true if i can", () => {
-    const initState = GameLogicService.gameStateInit();
+    const initState = GameLogic.gameStateInit();
 
     initState.board[0].value = 2;
     initState.board[1].value = 4;
     initState.board[2].value = 16;
     initState.board[3].value = 32;
 
-    expect(GameLogicService.canIMakeMove(initState, MoveDirection.UP)).toBe(
-      false
-    );
-    expect(GameLogicService.canIMakeMove(initState, MoveDirection.LEFT)).toBe(
-      false
-    );
-    expect(GameLogicService.canIMakeMove(initState, MoveDirection.RIGHT)).toBe(
-      false
-    );
-    expect(GameLogicService.canIMakeMove(initState, MoveDirection.DOWN)).toBe(
-      true
-    );
+    expect(GameLogic.canIMakeMove(initState, MoveDirection.UP)).toBe(false);
+    expect(GameLogic.canIMakeMove(initState, MoveDirection.LEFT)).toBe(false);
+    expect(GameLogic.canIMakeMove(initState, MoveDirection.RIGHT)).toBe(false);
+    expect(GameLogic.canIMakeMove(initState, MoveDirection.DOWN)).toBe(true);
   });
 
   test("canIMakeMove (full blocked board): should return false", () => {
-    const initState = GameLogicService.gameStateInit();
+    const initState = GameLogic.gameStateInit();
 
     initState.board[0].value = 2;
     initState.board[1].value = 4;
@@ -145,32 +137,24 @@ describe("Game logic service", () => {
     initState.board[14].value = 4;
     initState.board[15].value = 2;
 
-    expect(GameLogicService.canIMakeMove(initState, MoveDirection.UP)).toBe(
-      false
-    );
-    expect(GameLogicService.canIMakeMove(initState, MoveDirection.LEFT)).toBe(
-      false
-    );
-    expect(GameLogicService.canIMakeMove(initState, MoveDirection.RIGHT)).toBe(
-      false
-    );
-    expect(GameLogicService.canIMakeMove(initState, MoveDirection.DOWN)).toBe(
-      false
-    );
+    expect(GameLogic.canIMakeMove(initState, MoveDirection.UP)).toBe(false);
+    expect(GameLogic.canIMakeMove(initState, MoveDirection.LEFT)).toBe(false);
+    expect(GameLogic.canIMakeMove(initState, MoveDirection.RIGHT)).toBe(false);
+    expect(GameLogic.canIMakeMove(initState, MoveDirection.DOWN)).toBe(false);
   });
 
   test("checkGameOver with not loose tiles position should return state wint isGameOver: false", () => {
-    const initState = GameLogicService.gameStateInit();
-    expect(GameLogicService.checkGameOver(initState).isGameOver).toBe(true);
+    const initState = GameLogic.gameStateInit();
+    expect(GameLogic.checkGameOver(initState).isGameOver).toBe(true);
 
     initState.board[0].value = 2;
     initState.board[2].value = 4;
 
-    expect(GameLogicService.checkGameOver(initState).isGameOver).toBe(false);
+    expect(GameLogic.checkGameOver(initState).isGameOver).toBe(false);
   });
 
   test("checkGameOver with loose tiles position should return state with isGameOver: true", () => {
-    const initState = GameLogicService.gameStateInit();
+    const initState = GameLogic.gameStateInit();
 
     initState.board[0].value = 2;
     initState.board[1].value = 4;
@@ -192,6 +176,6 @@ describe("Game logic service", () => {
     initState.board[14].value = 4;
     initState.board[15].value = 2;
 
-    expect(GameLogicService.checkGameOver(initState).isGameOver).toBe(true);
+    expect(GameLogic.checkGameOver(initState).isGameOver).toBe(true);
   });
 });
