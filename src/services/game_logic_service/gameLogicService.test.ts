@@ -158,4 +158,40 @@ describe("Game logic service", () => {
       false
     );
   });
+
+  test("checkGameOver with not loose tiles position should return state wint isGameOver: false", () => {
+    const initState = GameLogicService.gameStateInit();
+    expect(GameLogicService.checkGameOver(initState).isGameOver).toBe(true);
+
+    initState.board[0].value = 2;
+    initState.board[2].value = 4;
+
+    expect(GameLogicService.checkGameOver(initState).isGameOver).toBe(false);
+  });
+
+  test("checkGameOver with loose tiles position should return state with isGameOver: true", () => {
+    const initState = GameLogicService.gameStateInit();
+
+    initState.board[0].value = 2;
+    initState.board[1].value = 4;
+    initState.board[2].value = 2;
+    initState.board[3].value = 4;
+
+    initState.board[4].value = 4;
+    initState.board[5].value = 2;
+    initState.board[6].value = 4;
+    initState.board[7].value = 2;
+
+    initState.board[8].value = 2;
+    initState.board[9].value = 4;
+    initState.board[10].value = 2;
+    initState.board[11].value = 4;
+
+    initState.board[12].value = 4;
+    initState.board[13].value = 2;
+    initState.board[14].value = 4;
+    initState.board[15].value = 2;
+
+    expect(GameLogicService.checkGameOver(initState).isGameOver).toBe(true);
+  });
 });

@@ -202,6 +202,24 @@ class GameLogicService {
 
     return false;
   }
+
+  static checkGameOver(state: IGameState): IGameState {
+    const isGameOver = this.canIMakeMove(state) === false;
+
+    return {
+      ...state,
+      isGameOver,
+    };
+  }
+
+  static checkWin(state: IGameState): IGameState {
+    const isWin = state.board.map(({ value }) => value).includes(2048);
+
+    return {
+      ...state,
+      isWin,
+    };
+  }
 }
 
 export default GameLogicService;
