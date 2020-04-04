@@ -3,6 +3,7 @@ const common = require("./webpack.common");
 
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const miniCss = require("mini-css-extract-plugin");
 // const HtmlWebpackChangeAssetExtensionPlugin = require("html-webpack-change-assets-extension-plugin");
 
 module.exports = merge(common, {
@@ -14,6 +15,9 @@ module.exports = merge(common, {
       test: /\.(js|css)$/,
       deleteOriginalAssets: false,
       filename: "[path].gz[query]",
+    }),
+    new miniCss({
+      filename: "[name].[hash:8].css",
     }),
     // TODO: make .gz work!
     // new HtmlWebpackChangeAssetExtensionPlugin(),
@@ -38,13 +42,6 @@ module.exports = merge(common, {
           mangle: true,
         },
       }),
-      // new OptimizeCSSPlugin({
-      //   cssProcessorOptions: {
-      //     "preset": "advanced",
-      //     "safe": true,
-      //     "map": { "inline": false },
-      //   },
-      // }),
     ],
   },
 });

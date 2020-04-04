@@ -4,6 +4,7 @@ const webpack = require("webpack");
 const PnpWebpackPlugin = require("pnp-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const miniCss = require("mini-css-extract-plugin");
 
 const rootPath = path.resolve(__dirname, "../");
 
@@ -47,6 +48,10 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: ["ts-loader"],
+      },
+      {
+        test: /\.(s*)css$/,
+        use: [miniCss.loader, "css-loader", "sass-loader", "postcss-loader"],
       },
     ],
   },
