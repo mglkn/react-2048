@@ -82,6 +82,7 @@ describe("Game logic service", () => {
 
   test("move: should shift tiles and merge with move LEFT", () => {
     const initState = GameLogicService.gameStateInit();
+
     initState.board[0].value = 8;
     initState.board[1].value = 8;
     initState.board[3].value = 16;
@@ -97,5 +98,64 @@ describe("Game logic service", () => {
     expect(resultState.board[8].value).toBe(8);
 
     expect(resultState.score).toBe(24);
+  });
+
+  test("canIMakeMove (not full board): should return false if i cant make move and true if i can", () => {
+    const initState = GameLogicService.gameStateInit();
+
+    initState.board[0].value = 2;
+    initState.board[1].value = 4;
+    initState.board[2].value = 16;
+    initState.board[3].value = 32;
+
+    expect(GameLogicService.canIMakeMove(initState, MoveDirection.UP)).toBe(
+      false
+    );
+    expect(GameLogicService.canIMakeMove(initState, MoveDirection.LEFT)).toBe(
+      false
+    );
+    expect(GameLogicService.canIMakeMove(initState, MoveDirection.RIGHT)).toBe(
+      false
+    );
+    expect(GameLogicService.canIMakeMove(initState, MoveDirection.DOWN)).toBe(
+      true
+    );
+  });
+
+  test("canIMakeMove (full blocked board): should return false", () => {
+    const initState = GameLogicService.gameStateInit();
+
+    initState.board[0].value = 2;
+    initState.board[1].value = 4;
+    initState.board[2].value = 2;
+    initState.board[3].value = 4;
+
+    initState.board[4].value = 4;
+    initState.board[5].value = 2;
+    initState.board[6].value = 4;
+    initState.board[7].value = 2;
+
+    initState.board[8].value = 2;
+    initState.board[9].value = 4;
+    initState.board[10].value = 2;
+    initState.board[11].value = 4;
+
+    initState.board[12].value = 4;
+    initState.board[13].value = 2;
+    initState.board[14].value = 4;
+    initState.board[15].value = 2;
+
+    expect(GameLogicService.canIMakeMove(initState, MoveDirection.UP)).toBe(
+      false
+    );
+    expect(GameLogicService.canIMakeMove(initState, MoveDirection.LEFT)).toBe(
+      false
+    );
+    expect(GameLogicService.canIMakeMove(initState, MoveDirection.RIGHT)).toBe(
+      false
+    );
+    expect(GameLogicService.canIMakeMove(initState, MoveDirection.DOWN)).toBe(
+      false
+    );
   });
 });

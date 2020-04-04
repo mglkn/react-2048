@@ -1,5 +1,5 @@
 import cloneDeep from "lodash/cloneDeep";
-// import isEqual from 'lodash/isEqual';
+import isEqual from "lodash/isEqual";
 import range from "lodash/range";
 
 type IBoardTile = {
@@ -175,6 +175,32 @@ class GameLogicService {
     }
 
     return newState;
+  }
+
+  static canIMakeMove(
+    state: IGameState,
+    moveDirection?: MoveDirection
+  ): boolean {
+    const _state = cloneDeep(state);
+
+    if (moveDirection !== undefined) {
+      const newState = this.move(_state, moveDirection!);
+      return isEqual(newState.board, _state.board) === false;
+    }
+
+    const upedState = this.move(_state, MoveDirection.UP);
+    if (!isEqual(upedState.board, _state.board)) return true;
+
+    const leftedState = this.move(_state, MoveDirection.LEFT);
+    if (!isEqual(leftedState.board, _state.board)) return true;
+
+    const rightedState = this.move(_state, MoveDirection.RIGHT);
+    if (!isEqual(rightedState.board, _state.board)) return true;
+
+    const downedState = this.move(_state, MoveDirection.DOWN);
+    if (!isEqual(downedState.board, _state.board)) return true;
+
+    return false;
   }
 }
 
