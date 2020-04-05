@@ -1,9 +1,9 @@
-import gameReduser, { IActionType } from "./gameReducer";
+import gameReduser from "./gameReducer";
 import GameLogic, { MoveDirection } from "./gameLogic/gameLogic";
 
 describe("gameReduser", () => {
   test("GAME_INIT action should init state", () => {
-    const newState = gameReduser(null, { type: IActionType.GAME_INIT });
+    const newState = gameReduser(null, { type: "init" });
 
     expect(newState.isWin).toBe(false);
     expect(newState.isGameOver).toBe(false);
@@ -19,8 +19,8 @@ describe("gameReduser", () => {
     initState.board[1].value = 2;
 
     const newState = gameReduser(initState, {
-      type: IActionType.GAME_STEP,
-      payload: MoveDirection.LEFT,
+      type: "game_step",
+      moveDirection: MoveDirection.LEFT,
     });
 
     expect(newState.isWin).toBe(false);
@@ -37,8 +37,8 @@ describe("gameReduser", () => {
     initState.board[1].value = 1024;
 
     const newState = gameReduser(initState, {
-      type: IActionType.GAME_STEP,
-      payload: MoveDirection.LEFT,
+      type: "game_step",
+      moveDirection: MoveDirection.LEFT,
     });
 
     expect(newState.isWin).toBe(true);
@@ -68,10 +68,10 @@ describe("gameReduser", () => {
     initState.board[15].value = 2;
 
     const newState = gameReduser(initState, {
-      type: IActionType.GAME_STEP,
-      payload: MoveDirection.LEFT,
+      type: "game_step",
+      moveDirection: MoveDirection.LEFT,
     });
 
-    expect(newState.isGameOver).toBe(false);
+    expect(newState.isGameOver).toBe(true);
   });
 });

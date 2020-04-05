@@ -1,22 +1,18 @@
 import GameLogic, { IGameState, MoveDirection } from "./gameLogic/gameLogic";
 
-type IAction = {
-  type: IActionType;
-  payload?: MoveDirection;
-};
+type IAction =
+  | { type: "init" }
+  | { type: "game_step"; moveDirection: MoveDirection };
 
-export enum IActionType {
-  GAME_INIT,
-  GAME_STEP,
-}
+export type ReducerType = (state: IGameState, action: IAction) => IGameState;
 
-const gameReducer = (state: IGameState | null, action: IAction): IGameState => {
+const gameReducer = (state: IGameState, action: IAction): IGameState => {
   switch (action.type) {
-    case IActionType.GAME_INIT:
+    case "init":
       const newState = GameLogic.gameStateInit();
       return GameLogic.addTile(GameLogic.addTile(newState));
-    case IActionType.GAME_STEP:
-      return GameLogic.gameStep(state, action.payload);
+    case "game_step":
+      return GameLogic.gameStep(state, action.moveDirection);
     default:
       return state;
   }

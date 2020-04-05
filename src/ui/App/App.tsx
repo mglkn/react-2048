@@ -1,13 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useReducer, useEffect, useCallback } from "react";
 
 import { ServicesContext } from "../../services/services";
+import { ReducerType } from "../../services/gameReducer/gameReducer";
 
 const App: React.FC = () => {
-  const gameReduser = useContext(ServicesContext);
+  const gameReduser: ReducerType = useContext(ServicesContext);
 
-  console.log(gameReduser);
+  const [state, dispatch] = useReducer(gameReduser, null);
 
-  return <div> Hello there!!! </div>;
+  const initDipatchCb = useCallback(() => dispatch({ type: "init" }), []);
+
+  // init game board
+  useEffect(() => initDipatchCb(), []);
+
+  return <div> {state !== null && <div>board</div>} </div>;
 };
 
 export default App;
