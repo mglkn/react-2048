@@ -9,6 +9,7 @@ import "./App.scss";
 
 import { ReducerContext } from "../../gameReducer/reduserContext";
 import { ReducerType } from "../../gameReducer/gameReducer";
+import throttle from "lodash/throttle";
 
 import Board from "../Board/Board";
 import { MoveDirection } from "../../services/gameLogic/gameLogic";
@@ -23,7 +24,7 @@ const App: React.FC = () => {
   useEffect(() => initDispatchCb(), []);
 
   const keyDownCb = useCallback(
-    (e: any) => {
+    throttle((e: any) => {
       if (![39, 37, 38, 40].includes(e.keyCode)) return;
 
       e.preventDefault();
@@ -44,7 +45,7 @@ const App: React.FC = () => {
       }
 
       dispatch({ type: "game_step", moveDirection });
-    },
+    }, 150),
     [state]
   );
 
