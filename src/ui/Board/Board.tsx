@@ -11,7 +11,7 @@ type IBoardProps = {
 
 const BoardBackground: React.FC = () => {
   return (
-    <section = className="board__background">
+    <section className="board__background">
       {Array(16)
         .fill(null)
         .map((_, index) => (

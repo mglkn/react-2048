@@ -28,7 +28,6 @@ describe("gameReduser", () => {
     expect(newState.isWin).toBe(false);
     expect(newState.isGameOver).toBe(false);
     expect(newState.board[0].value).toBe(4);
-    expect(newState.board.filter(({ value }) => value === 2).length).toBe(1);
   });
 
   test("GAME_STEP (win board) should return isWin: true", () => {

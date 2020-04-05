@@ -13,6 +13,7 @@ export type IGameState = {
   board: IBoard;
   isGameOver: boolean;
   isWin: boolean;
+  isMoved: boolean;
 };
 
 export enum MoveDirection {
@@ -52,6 +53,7 @@ class GameLogic implements IGameLogic {
       board: GameLogic._boardInit(),
       isGameOver: false,
       isWin: false,
+      isMoved: false,
     };
   }
 
@@ -59,17 +61,12 @@ class GameLogic implements IGameLogic {
     let state = currentState;
 
     if (!this.canIMakeMove(currentState, moveDirection)) {
-      return this.checkGameOver(state);
+      return { ...this.checkGameOver(state), isMoved: false };
     }
 
     state = this.move(state, moveDirection);
 
-    state = this.checkWin(state);
-    if (state.isWin) {
-      return state;
-    }
-
-    return this.addTile(state);
+    return { ...this.checkWin(state), isMoved: true };
   }
 
   addTile(gameState: IGameState): IGameState {
@@ -84,7 +81,7 @@ class GameLogic implements IGameLogic {
 
     gameState.board[randomIndex].value = 2;
 
-    return { ...gameState };
+    return { ...gameState, isMoved: false };
   }
 
   _getRevercedRowIndexes(moveDirection: MoveDirection, row: number): number[] {

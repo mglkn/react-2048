@@ -6,7 +6,8 @@ import {
 
 type IAction =
   | { type: "init" }
-  | { type: "game_step"; moveDirection: MoveDirection };
+  | { type: "game_step"; moveDirection: MoveDirection }
+  | { type: "add_tile" };
 
 export type ReducerType = (state: IGameState, action: IAction) => IGameState;
 
@@ -22,6 +23,8 @@ const createReducer = ({ gameLogic }: ICreateReducer): ReducerType => {
         return gameLogic.addTile(gameLogic.addTile(newState));
       case "game_step":
         return gameLogic.gameStep(state, action.moveDirection);
+      case "add_tile":
+        return gameLogic.addTile(state);
       default:
         return state;
     }
