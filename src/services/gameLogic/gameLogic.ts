@@ -2,12 +2,12 @@ import cloneDeep from "lodash/cloneDeep";
 import isEqual from "lodash/isEqual";
 import range from "lodash/range";
 
-type IBoardTile = {
+export type IBoardTile = {
   value: number;
   id: string;
 };
 
-type IBoard = IBoardTile[];
+export type IBoard = IBoardTile[];
 
 export type IGameState = {
   board: IBoard;

@@ -1,0 +1,39 @@
+.top-bar {
+  height: 15vh;
+  width: 80vh;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+
+  padding: 2vh;
+}
+
+.top-bar__title {
+  font-weight: 900;
+  color: darkblue;
+  font-size: 40px;
+}
+
+.top-bar__reset-button {
+  background-color: darkblue;
+  color: white;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 900;
+
+  padding: 5px 15px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .top-bar {
+    width: 80vw;
+
+    padding: 2vw;
+  }
+}
