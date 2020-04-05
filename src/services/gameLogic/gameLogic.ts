@@ -49,20 +49,8 @@ class GameLogic implements IGameLogic {
   }
 
   gameStateInit(): IGameState {
-    const board = GameLogic._boardInit();
-
-    board[0].value = 4;
-    board[1].value = 8;
-    board[2].value = 16;
-    board[3].value = 32;
-    board[4].value = 64;
-    board[5].value = 128;
-    board[6].value = 256;
-    board[7].value = 512;
-    board[8].value = 1024;
-
     return {
-      board, // GameLogic._boardInit(),
+      board: GameLogic._boardInit(),
       isGameOver: false,
       isWin: false,
       isMoved: false,
