@@ -103,3 +103,32 @@
     font-size: 6vw;
   }
 }
+
+@keyframes changeTileAnimation {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    box-shadow: 0 2px 0 0 #5fa5d9;
+    transform: scale(1.05);
+  }
+
+  50% {
+    box-shadow: none;
+    transform: scale(1.1);
+  }
+
+  75% {
+    box-shadow: 0 2px 0 0 #5fa5d9;
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.board__tile_animate {
+  animation: changeTileAnimation .15s ease-out;
+}

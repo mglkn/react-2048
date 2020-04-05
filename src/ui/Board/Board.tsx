@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import FlipMove from "react-flip-move";
 import config from "../../config";
 
@@ -27,10 +27,25 @@ type ITileProps = {
 };
 
 const Tile: React.FC<ITileProps> = ({ value }) => {
+  const [isAnimationShow, setIsAnimationShow] = useState(false);
+
+  const ref = useRef(value);
+
+  useEffect(() => {
+    if (value > ref.current) {
+      setIsAnimationShow(true);
+      setTimeout(() => setIsAnimationShow(false), 150);
+      ref.current = value;
+      return;
+    }
+    ref.current = 0;
+  }, [value]);
   return (
     <div
-      className="board__tile"
-      style={{ backgroundColor: config.colors[value] }}
+      className={`board__tile ${isAnimationShow ? "board__tile_animate" : ""}`}
+      style={{
+        backgroundColor: config.colors[value],
+      }}
     >
       {value !== 0 && value}
     </div>

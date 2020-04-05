@@ -1,6 +1,5 @@
 const config = {
   moveAnimatetionDuration: 70,
-  tileChangeAnimationDuration: 150,
   colors: {
     0: "transparent",
     2: "orange",
