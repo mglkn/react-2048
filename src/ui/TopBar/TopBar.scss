@@ -1,6 +1,6 @@
 .top-bar {
   height: 15vh;
-  width: 80vh;
+  width: 70vh;
 
   display: flex;
   flex-direction: row;
@@ -13,8 +13,14 @@
 
 .top-bar__title {
   font-weight: 900;
-  color: darkblue;
-  font-size: 40px;
+  color: white;
+  font-size: 7vh;
+  padding: 2vh 4vh;
+
+  background-color: #888;
+  border-radius: 3vh;
+
+  box-shadow: 0 0 2vh #333;
 }
 
 .top-bar__reset-button {
@@ -32,7 +38,7 @@
 
 @media (max-aspect-ratio: 1/1) {
   .top-bar {
-    width: 80vw;
+    width: 70vw;
 
     padding: 2vw;
   }

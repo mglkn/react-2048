@@ -8,5 +8,32 @@
   justify-content: start;
   align-items: center;
 
-  background-color: lightskyblue;
+  background: #40e0d0;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #40e0d0, #ff8c00, #ff0080);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #40e0d0, #ff8c00, #ff0080);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.actions {
+  box-sizing: border-box;
+  height: 20vh;
+  padding-top: 5vh;
+
+}
+
+.actions__reset-button {
+  background-color: red;
+  color: white;
+  height: 8vh;
+  font-size: 5vh;
+  font-weight: 900;
+
+  padding: 1vh 2vh;
+  border-radius: 1vh;
+  outline: none;
+  border: none;
+
+  box-shadow: 0 0 3vh #d03636;
 }

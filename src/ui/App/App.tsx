@@ -19,15 +19,15 @@ const App: React.FC = () => {
 
   const [state, dispatch] = useReducer(gameReduser, null);
 
-  const initDipatchCb = useCallback(() => dispatch({ type: "init" }), []);
+  const initDispatchCb = useCallback(() => dispatch({ type: "init" }), []);
   // init game board
-  useEffect(() => initDipatchCb(), []);
+  useEffect(() => initDispatchCb(), []);
 
   const keyDownCb = useCallback(
     (e: any) => {
-      e.preventDefault();
-
       if (![39, 37, 38, 40].includes(e.keyCode)) return;
+
+      e.preventDefault();
 
       let moveDirection: MoveDirection;
       switch (e.keyCode) {
@@ -86,7 +86,11 @@ const App: React.FC = () => {
     <main className="main-container">
       {state !== null && (
         <Fragment>
-          <TopBar initDispatchCb={initDipatchCb} />
+          <div className="actions">
+            <button className="actions__reset-button" onClick={initDispatchCb}>
+              RESET
+            </button>
+          </div>
           <Board board={state.board} />
         </Fragment>
       )}

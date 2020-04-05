@@ -12,13 +12,13 @@ type IBoardProps = {
 
 const BoardBackground: React.FC = () => {
   return (
-    <section className="board__background">
+    <div className="board__background">
       {Array(16)
         .fill(null)
         .map((_, index) => (
           <div key={index} className="board__background_tile" />
         ))}
-    </section>
+    </div>
   );
 };
 
@@ -45,6 +45,7 @@ const Tile: React.FC<ITileProps> = ({ value }) => {
       className={`board__tile ${isAnimationShow ? "board__tile_animate" : ""}`}
       style={{
         backgroundColor: config.colors[value],
+        borderBottom: value === 0 ? null : ".6vh solid #404040",
       }}
     >
       {value !== 0 && value}
