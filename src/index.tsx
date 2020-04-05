@@ -4,14 +4,13 @@ import React from "react";
 import { render } from "react-dom";
 
 import App from "./ui/App/App";
-import { ServicesContext } from "./services/services";
-import gameReducer from "./services/gameReducer/gameReducer";
+import { ReducerContext, gameReducer } from "./gameReducer/reduserContext";
 
 const Root: React.FC = () => (
   <React.StrictMode>
-    <ServicesContext.Provider value={gameReducer}>
+    <ReducerContext.Provider value={gameReducer}>
       <App />
-    </ServicesContext.Provider>
+    </ReducerContext.Provider>
   </React.StrictMode>
 );
 

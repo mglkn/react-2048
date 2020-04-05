@@ -1,10 +1,10 @@
 import React, { useContext, useReducer, useEffect, useCallback } from "react";
 
-import { ServicesContext } from "../../services/services";
-import { ReducerType } from "../../services/gameReducer/gameReducer";
+import { ReducerContext } from "../../gameReducer/reduserContext";
+import { ReducerType } from "../../gameReducer/gameReducer";
 
 const App: React.FC = () => {
-  const gameReduser: ReducerType = useContext(ServicesContext);
+  const gameReduser: ReducerType = useContext(ReducerContext);
 
   const [state, dispatch] = useReducer(gameReduser, null);
 

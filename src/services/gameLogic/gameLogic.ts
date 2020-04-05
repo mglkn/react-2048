@@ -23,9 +23,19 @@ export enum MoveDirection {
   RIGHT,
 }
 
-class GameLogic {
+export interface IGameLogic {
+  gameStateInit(): IGameState;
+  gameStep(currentState: IGameState, moveDirection: MoveDirection): IGameState;
+  addTile(gameState: IGameState): IGameState;
+  canIMakeMove(state: IGameState, moveDirection?: MoveDirection): boolean;
+  checkGameOver(state: IGameState): IGameState;
+  checkWin(state: IGameState): IGameState;
+  move(currentState: IGameState, moveDirection: MoveDirection): IGameState;
+}
+
+class GameLogic implements IGameLogic {
   static _currentId: number = 1;
-  static generateId(): string {
+  static _generateId(): string {
     return (this._currentId++).toString();
   }
 
@@ -34,23 +44,20 @@ class GameLogic {
       .fill(null)
       .map(() => ({
         value: 0,
-        id: this.generateId(),
+        id: this._generateId(),
       }));
   }
 
-  static gameStateInit(): IGameState {
+  gameStateInit(): IGameState {
     return {
-      board: this._boardInit(),
+      board: GameLogic._boardInit(),
       isGameOver: false,
       isWin: false,
       score: 0,
     };
   }
 
-  static gameStep(
-    currentState: IGameState,
-    moveDirection: MoveDirection
-  ): IGameState {
+  gameStep(currentState: IGameState, moveDirection: MoveDirection): IGameState {
     let state = currentState;
 
     if (!this.canIMakeMove(currentState, moveDirection)) {
@@ -67,7 +74,7 @@ class GameLogic {
     return this.addTile(state);
   }
 
-  static addTile(gameState: IGameState): IGameState {
+  addTile(gameState: IGameState): IGameState {
     const emptyTileIndexes = gameState.board
       .map(({ value }, index) => (value === 0 ? index : -1))
       .filter((index) => index >= 0);
@@ -82,10 +89,7 @@ class GameLogic {
     return { ...gameState };
   }
 
-  static _getRevercedRowIndexes(
-    moveDirection: MoveDirection,
-    row: number
-  ): number[] {
+  _getRevercedRowIndexes(moveDirection: MoveDirection, row: number): number[] {
     if (moveDirection === MoveDirection.RIGHT) {
       return range(1, 5)
         .map((i) => 4 * row + i - 1)
@@ -109,7 +113,7 @@ class GameLogic {
     return [];
   }
 
-  static _mergeBoard(state: IGameState, indexes: number[]): IGameState {
+  _mergeBoard(state: IGameState, indexes: number[]): IGameState {
     const board = state.board;
 
     let currentTileIndex: number | null = null;
@@ -147,7 +151,7 @@ class GameLogic {
     };
   }
 
-  static _shiftBoard(state: IGameState, indexes: number[]): IGameState {
+  _shiftBoard(state: IGameState, indexes: number[]): IGameState {
     const board = state.board;
 
     let pivot = 0;
@@ -181,10 +185,7 @@ class GameLogic {
     };
   }
 
-  static move(
-    currentState: IGameState,
-    moveDirection: MoveDirection
-  ): IGameState {
+  move(currentState: IGameState, moveDirection: MoveDirection): IGameState {
     let newState = cloneDeep(currentState);
 
     for (const row of range(0, 4)) {
@@ -197,10 +198,7 @@ class GameLogic {
     return newState;
   }
 
-  static canIMakeMove(
-    state: IGameState,
-    moveDirection?: MoveDirection
-  ): boolean {
+  canIMakeMove(state: IGameState, moveDirection?: MoveDirection): boolean {
     const _state = cloneDeep(state);
 
     if (moveDirection !== undefined) {
@@ -223,7 +221,7 @@ class GameLogic {
     return false;
   }
 
-  static checkGameOver(state: IGameState): IGameState {
+  checkGameOver(state: IGameState): IGameState {
     const isGameOver = this.canIMakeMove(state) === false;
 
     return {
@@ -232,7 +230,7 @@ class GameLogic {
     };
   }
 
-  static checkWin(state: IGameState): IGameState {
+  checkWin(state: IGameState): IGameState {
     const isWin = state.board.filter(({ value }) => value === 2048).length > 0;
 
     return {

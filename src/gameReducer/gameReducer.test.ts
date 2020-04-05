@@ -1,9 +1,12 @@
-import gameReduser from "./gameReducer";
-import GameLogic, { MoveDirection } from "./gameLogic/gameLogic";
+import createReducer from "./gameReducer";
+import GameLogic, { MoveDirection } from "../services/gameLogic/gameLogic";
 
 describe("gameReduser", () => {
+  const gameLogic = new GameLogic();
+  const gameReducer = createReducer({ gameLogic });
+
   test("GAME_INIT action should init state", () => {
-    const newState = gameReduser(null, { type: "init" });
+    const newState = gameReducer(null, { type: "init" });
 
     expect(newState.isWin).toBe(false);
     expect(newState.isGameOver).toBe(false);
@@ -13,12 +16,12 @@ describe("gameReduser", () => {
   });
 
   test("GAME_STEP (ordinary board) should move board", () => {
-    const initState = GameLogic.gameStateInit();
+    const initState = gameLogic.gameStateInit();
 
     initState.board[0].value = 2;
     initState.board[1].value = 2;
 
-    const newState = gameReduser(initState, {
+    const newState = gameReducer(initState, {
       type: "game_step",
       moveDirection: MoveDirection.LEFT,
     });
@@ -31,12 +34,12 @@ describe("gameReduser", () => {
   });
 
   test("GAME_STEP (win board) should return isWin: true", () => {
-    const initState = GameLogic.gameStateInit();
+    const initState = gameLogic.gameStateInit();
 
     initState.board[0].value = 1024;
     initState.board[1].value = 1024;
 
-    const newState = gameReduser(initState, {
+    const newState = gameReducer(initState, {
       type: "game_step",
       moveDirection: MoveDirection.LEFT,
     });
@@ -45,7 +48,7 @@ describe("gameReduser", () => {
   });
 
   test("GAME_STEP (loose board) should return isGameOver: true", () => {
-    const initState = GameLogic.gameStateInit();
+    const initState = gameLogic.gameStateInit();
 
     initState.board[0].value = 2;
     initState.board[1].value = 4;
@@ -67,7 +70,7 @@ describe("gameReduser", () => {
     initState.board[14].value = 4;
     initState.board[15].value = 2;
 
-    const newState = gameReduser(initState, {
+    const newState = gameReducer(initState, {
       type: "game_step",
       moveDirection: MoveDirection.LEFT,
     });
