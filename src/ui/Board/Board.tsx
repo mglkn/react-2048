@@ -1,5 +1,6 @@
 import React from "react";
 import FlipMove from "react-flip-move";
+import config from "../../config";
 
 import "./Board.scss";
 
@@ -27,7 +28,10 @@ type ITileProps = {
 
 const Tile: React.FC<ITileProps> = ({ value }) => {
   return (
-    <div className="board__tile" style={{ backgroundColor: "orange" }}>
+    <div
+      className="board__tile"
+      style={{ backgroundColor: config.colors[value] }}
+    >
       {value !== 0 && value}
     </div>
   );
@@ -37,7 +41,10 @@ const Board: React.FC<IBoardProps> = ({ board }) => {
   return (
     <div className="board">
       <BoardBackground />
-      <FlipMove duration={70} className="board__tiles">
+      <FlipMove
+        duration={config.moveAnimatetionDuration}
+        className="board__tiles"
+      >
         {board.map((tileState) => (
           <div key={tileState.id}>
             <Tile value={tileState.value} />
