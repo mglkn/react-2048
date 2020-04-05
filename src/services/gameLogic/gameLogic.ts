@@ -13,7 +13,6 @@ export type IGameState = {
   board: IBoard;
   isGameOver: boolean;
   isWin: boolean;
-  score: number;
 };
 
 export enum MoveDirection {
@@ -53,7 +52,6 @@ class GameLogic implements IGameLogic {
       board: GameLogic._boardInit(),
       isGameOver: false,
       isWin: false,
-      score: 0,
     };
   }
 
@@ -117,7 +115,6 @@ class GameLogic implements IGameLogic {
     const board = state.board;
 
     let currentTileIndex: number | null = null;
-    let scoreDelta = 0;
     for (const index of indexes) {
       if (board[index].value === 0) {
         continue;
@@ -132,7 +129,6 @@ class GameLogic implements IGameLogic {
         board[index] = tmp;
 
         board[currentTileIndex].value *= 2;
-        scoreDelta += board[currentTileIndex].value;
         board[index].value = 0;
 
         currentTileIndex = null;
@@ -147,7 +143,6 @@ class GameLogic implements IGameLogic {
     return {
       ...state,
       board,
-      score: state.score + scoreDelta,
     };
   }
 

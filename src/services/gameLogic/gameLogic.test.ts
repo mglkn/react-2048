@@ -8,7 +8,6 @@ describe("Game logic service", () => {
 
     expect(initialState.isGameOver).toBe(false);
     expect(initialState.isWin).toBe(false);
-    expect(initialState.score).toBe(0);
     expect(initialState.board.map(({ value }) => value)).toEqual(
       GameLogic._boardInit().map(({ value }) => value)
     );
@@ -38,8 +37,6 @@ describe("Game logic service", () => {
     expect(resultState.board[4].value).toBe(16);
 
     expect(resultState.board[2].value).toBe(8);
-
-    expect(resultState.score).toBe(24);
   });
 
   test("move: should shift tiles and merge with move DOWN", () => {
@@ -58,8 +55,6 @@ describe("Game logic service", () => {
     expect(resultState.board[12].value).toBe(16);
 
     expect(resultState.board[14].value).toBe(8);
-
-    expect(resultState.score).toBe(24);
   });
 
   test("move: should shift tiles and merge with move RIGHT", () => {
@@ -78,8 +73,6 @@ describe("Game logic service", () => {
     expect(resultState.board[3].value).toBe(32);
 
     expect(resultState.board[11].value).toBe(8);
-
-    expect(resultState.score).toBe(40);
   });
 
   test("move: should shift tiles and merge with move LEFT", () => {
@@ -98,8 +91,6 @@ describe("Game logic service", () => {
     expect(resultState.board[1].value).toBe(16);
 
     expect(resultState.board[8].value).toBe(8);
-
-    expect(resultState.score).toBe(24);
   });
 
   test("canIMakeMove (not full board): should return false if i cant make move and true if i can", () => {

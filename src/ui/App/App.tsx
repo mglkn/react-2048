@@ -27,7 +27,7 @@ const App: React.FC = () => {
     <main className="main-container">
       {state !== null && (
         <Fragment>
-          <TopBar score={state.score} initDispatchCb={initDipatchCb} />
+          <TopBar initDispatchCb={initDipatchCb} />
           <Board board={state.board} />
         </Fragment>
       )}
