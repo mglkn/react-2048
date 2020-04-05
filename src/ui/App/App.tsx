@@ -11,7 +11,6 @@ import { ReducerContext } from "../../gameReducer/reduserContext";
 import { ReducerType } from "../../gameReducer/gameReducer";
 
 import Board from "../Board/Board";
-import TopBar from "../TopBar/TopBar";
 import { MoveDirection } from "../../services/gameLogic/gameLogic";
 
 const App: React.FC = () => {
