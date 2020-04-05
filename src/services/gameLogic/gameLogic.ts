@@ -60,13 +60,17 @@ class GameLogic implements IGameLogic {
   gameStep(currentState: IGameState, moveDirection: MoveDirection): IGameState {
     let state = currentState;
 
+    if (currentState.isWin || currentState.isGameOver) return state;
+
     if (!this.canIMakeMove(currentState, moveDirection)) {
       return { ...this.checkGameOver(state), isMoved: false };
     }
 
     state = this.move(state, moveDirection);
 
-    return { ...this.checkWin(state), isMoved: true };
+    state = { ...this.checkWin(state), isMoved: true };
+
+    return state;
   }
 
   addTile(gameState: IGameState): IGameState {
@@ -81,7 +85,7 @@ class GameLogic implements IGameLogic {
 
     gameState.board[randomIndex].value = 2;
 
-    return { ...gameState, isMoved: false };
+    return { ...this.checkGameOver(gameState), isMoved: false };
   }
 
   _getRevercedRowIndexes(moveDirection: MoveDirection, row: number): number[] {

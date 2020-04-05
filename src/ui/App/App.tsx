@@ -50,10 +50,29 @@ const App: React.FC = () => {
   );
 
   useEffect(() => {
-    if (state === null || state.isMoved === false) return;
+    if (
+      state === null ||
+      state.isMoved === false ||
+      state.isWin ||
+      state.isGameOver
+    )
+      return;
+
     setTimeout(() => {
       dispatch({ type: "add_tile" });
     }, 150);
+  }, [state]);
+
+  useEffect(() => {
+    if (state === null) return;
+
+    if (state.isWin) {
+      console.log("YOURE WIN");
+    }
+
+    if (state.isGameOver) {
+      console.log("YOURE LOOSE");
+    }
   }, [state]);
 
   useEffect(() => {
