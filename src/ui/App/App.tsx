@@ -6,13 +6,14 @@ import React, {
   Fragment,
 } from "react";
 import "./App.scss";
+import throttle from "lodash/throttle";
 
 import { ReducerContext } from "../../gameReducer/reduserContext";
 import { ReducerType } from "../../gameReducer/gameReducer";
-import throttle from "lodash/throttle";
+import { MoveDirection } from "../../services/gameLogic/gameLogic";
 
 import Board from "../Board/Board";
-import { MoveDirection } from "../../services/gameLogic/gameLogic";
+import DoneGamePopup from "../DoneGamePopup/DoneGamePopup";
 
 const App: React.FC = () => {
   const gameReduser: ReducerType = useContext(ReducerContext);
@@ -111,6 +112,9 @@ const App: React.FC = () => {
           </div>
           <Board board={state.board} />
         </Fragment>
+      )}
+      {state !== null && (state.isWin || state.isGameOver) && (
+        <DoneGamePopup state={state} initDispatchCb={initDispatchCb} />
       )}
     </main>
   );

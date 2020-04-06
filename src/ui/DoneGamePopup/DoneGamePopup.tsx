@@ -1,0 +1,55 @@
+import React from "react";
+
+import "./DoneGamePopup.scss";
+
+import { IGameState } from "../../services/gameLogic/gameLogic";
+
+type EmojiProps = {
+  symbol: string;
+  label: string;
+};
+
+const Emoji: React.FC<EmojiProps> = (props) => (
+  <span
+    className="emoji"
+    role="img"
+    aria-label={props.label ? props.label : ""}
+    aria-hidden={props.label ? "false" : "true"}
+  >
+    {props.symbol}
+  </span>
+);
+
+type IDoneGamePopupProps = {
+  state: IGameState;
+  initDispatchCb: () => void;
+};
+
+const DoneGamePopup: React.FC<IDoneGamePopupProps> = ({
+  state,
+  initDispatchCb,
+}) => {
+  return (
+    <div className="done-game-popup">
+      <div className="done-game-popup__inner">
+        {state.isWin && (
+          <h2>
+            You WIN &nbsp;
+            <Emoji label="win" symbol="😀" />
+          </h2>
+        )}
+        {state.isGameOver && (
+          <h2>
+            Game OVER &nbsp;
+            <Emoji label="win" symbol="😵" />
+          </h2>
+        )}
+        <button className="done-game-popup__button" onClick={initDispatchCb}>
+          NEW GAME
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default DoneGamePopup;

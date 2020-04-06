@@ -1,0 +1,40 @@
+.done-game-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(#000, 0.7);
+}
+
+.done-game-popup__inner {
+  width: 50vh;
+  box-sizing: border-box;
+  padding: 20px;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  border-radius: 2vh;
+}
+
+.done-game-popup__button {
+  background-color: red;
+  color: white;
+  height: 6vh;
+  font-size: 1.7vh;
+  font-weight: 900;
+
+  padding: 1vh 2vh;
+  border-radius: 1vh;
+  outline: none;
+  border: none;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .done-game-popup__inner {
+    width: 80vw;
+  }
+}
