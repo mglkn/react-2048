@@ -25,19 +25,34 @@ const App: React.FC = () => {
 
   const keyDownCb = useCallback(
     throttle((e: any) => {
-      if (![39, 37, 38, 40].includes(e.keyCode)) return;
+      if (
+        ![
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowRight",
+          "ArrowLeft",
+          "w",
+          "d",
+          "a",
+          "s",
+        ].includes(e.key)
+      )
+        return;
 
       e.preventDefault();
 
       let moveDirection: MoveDirection;
-      switch (e.keyCode) {
-        case 39:
+      switch (e.key) {
+        case "ArrowRight":
+        case "d":
           moveDirection = MoveDirection.RIGHT;
           break;
-        case 37:
+        case "ArrowLeft":
+        case "a":
           moveDirection = MoveDirection.LEFT;
           break;
-        case 38:
+        case "ArrowUp":
+        case "w":
           moveDirection = MoveDirection.UP;
           break;
         default:
@@ -49,6 +64,7 @@ const App: React.FC = () => {
     [state]
   );
 
+  // add tile after move
   useEffect(() => {
     if (
       state === null ||
@@ -63,6 +79,7 @@ const App: React.FC = () => {
     }, 150);
   }, [state]);
 
+  // check winner/gameover
   useEffect(() => {
     if (state === null) return;
 
@@ -77,6 +94,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     window.addEventListener("keydown", keyDownCb);
+
     return () => {
       window.removeEventListener("keydown", keyDownCb);
     };
