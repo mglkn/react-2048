@@ -4,18 +4,22 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/enzyme": "^3.10.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^25.2.1",
     "@types/lodash": "^4.14.149",
     "@types/react": "^16.9.32",
     "@types/react-dom": "^16.9.6",
-    "@types/react-test-renderer": "^16.9.2",
     "autoprefixer": "^9.7.5",
     "clean-webpack-plugin": "^3.0.0",
     "compression-webpack-plugin": "^3.1.0",
     "css-loader": "^3.4.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "html-webpack-change-assets-extension-plugin": "^1.2.0",
     "html-webpack-plugin": "^4.0.4",
     "jest": "^25.2.7",
+    "jest-transform-css": "^2.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "pnp-webpack-plugin": "^1.6.4",
@@ -23,7 +27,6 @@
     "postcss-loader": "^3.0.0",
     "postcss-normalize": "^8.0.1",
     "prettier": "^2.0.2",
-    "react-test-renderer": "^16.13.1",
     "sass-loader": "^8.0.2",
     "ts-jest": "^25.3.1",
     "ts-loader": "^6.2.2",
@@ -52,7 +55,8 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.tsx?$": "ts-jest"
+      "^.+\\.tsx?$": "ts-jest",
+      ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
@@ -62,6 +66,9 @@
       "jsx",
       "json",
       "node"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/config/setupTests.js"
     ]
   }
 }

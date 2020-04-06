@@ -18,5 +18,5 @@
     "plugins": [{ "name": "typescript-tslint-plugin" }]
   },
   "exlude": ["node_modules", "build", "config", "assets"],
-  "include": ["src"]
+  "include": ["./src/**/*"]
 }
