@@ -138,7 +138,6 @@ describe("Game logic service", () => {
 
   test("checkGameOver with not loose tiles position should return state wint isGameOver: false", () => {
     const initState = gameLogic.gameStateInit();
-    expect(gameLogic.checkGameOver(initState).isGameOver).toBe(true);
 
     initState.board[0].value = 2;
     initState.board[2].value = 4;
