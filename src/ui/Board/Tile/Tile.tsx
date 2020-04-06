@@ -16,12 +16,16 @@ const Tile: React.FC<ITileProps> = ({ value }) => {
   useEffect(() => {
     if (value > ref.current) {
       setIsAnimationShow(true);
-      setTimeout(() => setIsAnimationShow(false), 150);
+      const timeoutID = setTimeout(() => setIsAnimationShow(false), 150);
       ref.current = value;
-      return;
+
+      return () => {
+        clearTimeout(timeoutID);
+      };
     }
     ref.current = 0;
   }, [value]);
+
   return (
     <div
       className={`board__tile ${isAnimationShow ? "board__tile_animate" : ""}`}
