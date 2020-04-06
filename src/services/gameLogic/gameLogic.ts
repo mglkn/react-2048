@@ -218,7 +218,11 @@ class GameLogic implements IGameLogic {
   }
 
   checkGameOver(state: IGameState): IGameState {
-    const isGameOver = this.canIMakeMove(state) === false;
+    let isGameOver = this.canIMakeMove(state) === false;
+
+    // check if board empty
+    if (state.board.filter(({ value }) => value > 0).length === 0)
+      isGameOver = false;
 
     return {
       ...state,
