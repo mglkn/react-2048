@@ -22,12 +22,12 @@ const Emoji: React.FC<EmojiProps> = (props) => (
 
 type IDoneGamePopupProps = {
   state: IGameState;
-  initDispatchCb: () => void;
+  newGameAction: () => void;
 };
 
 const DoneGamePopup: React.FC<IDoneGamePopupProps> = ({
   state,
-  initDispatchCb,
+  newGameAction,
 }) => {
   return (
     <div className="done-game-popup">
@@ -44,7 +44,7 @@ const DoneGamePopup: React.FC<IDoneGamePopupProps> = ({
             <Emoji label="win" symbol="😵" />
           </h2>
         )}
-        <button className="done-game-popup__button" onClick={initDispatchCb}>
+        <button className="done-game-popup__button" onClick={newGameAction}>
           NEW GAME
         </button>
       </div>

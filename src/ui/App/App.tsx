@@ -117,7 +117,7 @@ const App: React.FC = () => {
         </Fragment>
       )}
       {state !== null && (state.isWin || state.isGameOver) && (
-        <DoneGamePopup state={state} initDispatchCb={resetCb} />
+        <DoneGamePopup state={state} newGameAction={resetCb} />
       )}
     </main>
   );
