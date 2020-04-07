@@ -15,7 +15,10 @@
     "autoprefixer": "^9.7.5",
     "clean-webpack-plugin": "^3.0.0",
     "compression-webpack-plugin": "^3.1.0",
+    "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.10",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "html-webpack-change-assets-extension-plugin": "^1.2.0",
@@ -24,7 +27,6 @@
     "jest-transform-css": "^2.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
-    "pnp-webpack-plugin": "^1.6.4",
     "postcss-flexbugs-fixes": "^4.2.0",
     "postcss-loader": "^3.0.0",
     "postcss-normalize": "^8.0.1",
@@ -45,7 +47,7 @@
   },
   "scripts": {
     "build": "webpack --config ./config/webpack.prod.js",
-    "dev": "webpack-dev-server --config ./config/webpack.dev.js",
+    "dev": "webpack-dev-server --config ./config/webpack.dev.js --hot",
     "format": "prettier --write src",
     "test": "jest"
   },

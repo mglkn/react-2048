@@ -9,7 +9,6 @@ module.exports = merge(common, {
 
   devServer: {
     contentBase: path.resolve(__dirname, "../build"),
-    hot: true,
     port: 1337,
     open: true,
     overlay: true,
@@ -18,7 +17,7 @@ module.exports = merge(common, {
 
   plugins: [
     new miniCss({
-      filename: "[name].[hash:8].css",
+      filename: "[name].css",
     }),
   ],
 });

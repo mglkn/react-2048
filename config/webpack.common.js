@@ -1,10 +1,10 @@
 const path = require("path");
 
 const webpack = require("webpack");
-const PnpWebpackPlugin = require("pnp-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const miniCss = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const rootPath = path.resolve(__dirname, "../");
 
@@ -21,16 +21,8 @@ module.exports = {
     publicPath: "",
   },
 
-  // resolve: {
-  //   plugins: [PnpWebpackPlugin],
-  // },
-
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".scss", ".css"],
-  },
-
-  resolveLoader: {
-    plugins: [PnpWebpackPlugin.moduleLoader(module)],
   },
 
   devtool: "inline-source-map",
@@ -43,6 +35,12 @@ module.exports = {
       // TODO: make .gz work!
       // jsExtension: ".gz",
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(rootPath, "assets/favicon.ico"),
+        to: path.resolve(rootPath, "build"),
+      },
+    ]),
     new webpack.HotModuleReplacementPlugin(),
   ],
 
@@ -51,11 +49,22 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: [/\.test.tsx?$/, /node_modules/],
-        loader: "ts-loader",
+        use: ["ts-loader"],
       },
       {
         test: /\.(s*)css$/,
-        use: [miniCss.loader, "css-loader", "sass-loader", "postcss-loader"],
+        use: [
+          {
+            loader: miniCss.loader,
+            options: {
+              hmr: true,
+              reloadAll: true,
+            },
+          },
+          "css-loader",
+          "sass-loader",
+          "postcss-loader",
+        ],
       },
     ],
   },

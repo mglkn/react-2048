@@ -1,15 +1,26 @@
 const merge = require("webpack-merge");
 const common = require("./webpack.common");
+const path = require("path");
 
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const miniCss = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const HtmlWebpackChangeAssetExtensionPlugin = require("html-webpack-change-assets-extension-plugin");
+
+const rootPath = path.resolve(__dirname, "../");
 
 module.exports = merge(common, {
   mode: "production",
 
   plugins: [
+    new HtmlWebpackPlugin({
+      title: "React 2048",
+      template: path.join(rootPath, "assets/index.hbs"),
+      minify: { collapseWhitespace: true },
+      // TODO: make .gz work!
+      // jsExtension: ".gz",
+    }),
     new CompressionWebpackPlugin({
       algorithm: "gzip",
       test: /\.(js|css)$/,
@@ -22,6 +33,8 @@ module.exports = merge(common, {
     // TODO: make .gz work!
     // new HtmlWebpackChangeAssetExtensionPlugin(),
   ],
+
+  devtool: false,
 
   optimization: {
     minimizer: [
