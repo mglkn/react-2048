@@ -20,7 +20,6 @@
   box-sizing: border-box;
   height: 20vh;
   padding-top: 5vh;
-
 }
 
 .actions__reset-button {
@@ -33,7 +32,12 @@
   padding: 1vh 2vh;
   border-radius: 1vh;
   outline: none;
-  border: none;
+  border: 0;
+  border-bottom: 0.3vh solid rgb(186, 27, 27);
 
   box-shadow: 0 0 3vh #d03636;
+}
+
+.actions__reset-button:active {
+  border: none;
 }
