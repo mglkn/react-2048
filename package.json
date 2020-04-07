@@ -46,7 +46,7 @@
     "build": "webpack --config ./config/webpack.prod.js",
     "dev": "webpack-dev-server --config ./config/webpack.dev.js",
     "format": "prettier --write src",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "dependencies": {
     "lodash": "^4.17.15",

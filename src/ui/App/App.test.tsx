@@ -23,7 +23,7 @@ describe("App widget", () => {
     expect(gameReducerMock.mock.calls[0]).toEqual([null, { type: "init" }]);
   });
 
-  test.only("should update board after move", () => {
+  test("should update board after move", () => {
     const gameLogic = new GameLogic();
     const initialState = gameLogic.gameStateInit();
     const gameReducerMock = jest.fn().mockReturnValue(initialState);
