@@ -7,6 +7,7 @@ import { IStorage } from "../services/storage/storage";
 
 type IAction =
   | { type: "init" }
+  | { type: "reset" }
   | { type: "game_step"; moveDirection: MoveDirection }
   | { type: "add_tile" };
 
@@ -22,11 +23,21 @@ const createReducer = ({ gameLogic, storage }: ICreateReducer): ReducerType => {
     switch (action.type) {
       case "init":
         const savedState = storage?.getState();
-        if (savedState !== null && savedState !== undefined) {
+
+        if (
+          savedState !== null &&
+          savedState !== undefined &&
+          savedState.isGameOver === false &&
+          savedState.isWin === false
+        ) {
           return savedState;
         }
+
         const initState = gameLogic.gameStateInit();
         return gameLogic.addTile(gameLogic.addTile(initState));
+
+      case "reset":
+        return gameLogic.addTile(gameLogic.addTile(gameLogic.gameStateInit()));
 
       case "game_step":
         return gameLogic.gameStep(state, action.moveDirection);

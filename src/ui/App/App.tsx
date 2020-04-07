@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import "./App.scss";
 import throttle from "lodash/throttle";
+import { useSwipeable } from "react-swipeable";
 
 import { ReducerContext } from "../../gameReducer/reduserContext";
 import { ReducerType } from "../../gameReducer/gameReducer";
@@ -23,6 +24,8 @@ const App: React.FC = () => {
   const initDispatchCb = useCallback(() => dispatch({ type: "init" }), []);
   // init game board
   useEffect(() => initDispatchCb(), []);
+
+  const resetCb = () => dispatch({ type: "reset" });
 
   const keyDownCb = useCallback(
     throttle((e: any) => {
@@ -80,19 +83,6 @@ const App: React.FC = () => {
     }, 150);
   }, [state]);
 
-  // check winner/gameover
-  useEffect(() => {
-    if (state === null) return;
-
-    if (state.isWin) {
-      console.log("YOURE WIN");
-    }
-
-    if (state.isGameOver) {
-      console.log("YOURE LOOSE");
-    }
-  }, [state]);
-
   useEffect(() => {
     window.addEventListener("keydown", keyDownCb);
 
@@ -101,20 +91,33 @@ const App: React.FC = () => {
     };
   }, []);
 
+  const swipHandlers = useSwipeable({
+    onSwipedUp: (_) =>
+      dispatch({ type: "game_step", moveDirection: MoveDirection.UP }),
+    onSwipedDown: (_) =>
+      dispatch({ type: "game_step", moveDirection: MoveDirection.DOWN }),
+    onSwipedLeft: (_) =>
+      dispatch({ type: "game_step", moveDirection: MoveDirection.LEFT }),
+    onSwipedRight: (_) =>
+      dispatch({ type: "game_step", moveDirection: MoveDirection.RIGHT }),
+  });
+
   return (
     <main className="main-container">
       {state !== null && (
         <Fragment>
           <div className="actions">
-            <button className="actions__reset-button" onClick={initDispatchCb}>
+            <button className="actions__reset-button" onClick={resetCb}>
               RESET
             </button>
           </div>
-          <Board board={state.board} />
+          <div {...swipHandlers}>
+            <Board board={state.board} />
+          </div>
         </Fragment>
       )}
       {state !== null && (state.isWin || state.isGameOver) && (
-        <DoneGamePopup state={state} initDispatchCb={initDispatchCb} />
+        <DoneGamePopup state={state} initDispatchCb={resetCb} />
       )}
     </main>
   );
