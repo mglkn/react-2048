@@ -20,6 +20,10 @@
   border-radius: 2vh;
 }
 
+.done-game-popup__inner_animation {
+  animation: popup-appearance 0.3s ease-out;
+}
+
 .done-game-popup__button {
   background-color: red;
   color: white;
@@ -30,7 +34,21 @@
   padding: 1vh 2vh;
   border-radius: 1vh;
   outline: none;
-  border: none;
+  border-bottom: 2px solid rgb(143, 15, 15);
+}
+
+.done-game-popup__button:active {
+  border-bottom: none;
+}
+
+@keyframes popup-appearance {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @media (max-aspect-ratio: 1/1) {

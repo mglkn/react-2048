@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./DoneGamePopup.scss";
 
@@ -31,7 +31,7 @@ const DoneGamePopup: React.FC<IDoneGamePopupProps> = ({
 }) => {
   return (
     <div className="done-game-popup">
-      <div className="done-game-popup__inner">
+      <div className="done-game-popup__inner done-game-popup__inner_animation">
         {state.isWin && (
           <h2>
             You WIN &nbsp;
