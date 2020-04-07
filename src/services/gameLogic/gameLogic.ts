@@ -78,7 +78,7 @@ class GameLogic implements IGameLogic {
       .map(({ value }, index) => (value === 0 ? index : -1))
       .filter((index) => index >= 0);
 
-    if (emptyTileIndexes.length === 0) return;
+    if (emptyTileIndexes.length === 0) return gameState;
 
     const randomIndex =
       emptyTileIndexes[Math.floor(Math.random() * emptyTileIndexes.length)];
