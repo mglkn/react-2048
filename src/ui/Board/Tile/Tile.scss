@@ -1,8 +1,8 @@
 .board__tile {
   box-sizing: border-box;
-  width: calc((70vh - 1vh * 8) / 4);
-  height: calc((70vh - 1vh * 8) / 4);
-  margin: 1vh;
+  width: calc((70vmin - 1vmin * 8) / 4);
+  height: calc((70vmin - 1vmin * 8) / 4);
+  margin: 1vmin;
 
   display: flex;
   justify-content: center;
@@ -11,21 +11,9 @@
 
   color: white;
   font-weight: 700;
-  font-size: 6vh;
+  font-size: 6vmin;
 
-  border-radius: 1vh;
-}
-
-@media (max-aspect-ratio: 1/1) {
-  .board__tile {
-    width: calc((70vw - 1vw * 8) / 4);
-    height: calc((70vw - 1vw * 8) / 4);
-    margin: 1vw;
-
-    border-radius: 1vw;
-    font-size: 6vw;
-    font-weight: 900;
-  }
+  border-radius: 1vmin;
 }
 
 @keyframes changeTileAnimation {

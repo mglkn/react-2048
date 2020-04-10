@@ -17,24 +17,24 @@
 
 .actions {
   box-sizing: border-box;
-  height: 20vh;
-  padding-top: 5vh;
+  height: 20vmin;
+  padding-top: 5vmin;
 }
 
 .actions__reset-button {
   background-color: red;
   color: white;
-  height: 8vh;
-  font-size: 5vh;
+  height: 8vmin;
+  font-size: 5vmin;
   font-weight: 900;
 
-  padding: 1vh 2vh;
-  border-radius: 1vh;
+  padding: 1vmin 2vmin;
+  border-radius: 1vmin;
   outline: none;
   border: 0;
-  border-bottom: 0.3vh solid rgb(186, 27, 27);
+  border-bottom: 0.3vmin solid rgb(186, 27, 27);
 
-  box-shadow: 0 0 3vh #d03636;
+  box-shadow: 0 0 3vmin #d03636;
 }
 
 .actions__reset-button:active {
