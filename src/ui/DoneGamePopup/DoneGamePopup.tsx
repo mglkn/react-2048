@@ -44,7 +44,11 @@ const DoneGamePopup: React.FC<IDoneGamePopupProps> = ({
             <Emoji label="win" symbol="😵" />
           </h2>
         )}
-        <button className="done-game-popup__button" onClick={newGameAction}>
+        <button
+          tabIndex={0}
+          className="done-game-popup__button"
+          onClick={newGameAction}
+        >
           NEW GAME
         </button>
       </div>

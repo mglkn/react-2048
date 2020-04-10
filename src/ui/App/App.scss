@@ -30,11 +30,14 @@
 
   padding: 1vmin 2vmin;
   border-radius: 1vmin;
-  outline: none;
   border: 0;
   border-bottom: 0.3vmin solid rgb(186, 27, 27);
 
   box-shadow: 0 0 3vmin #d03636;
+}
+
+.actions__reset-button:focus {
+  outline-color: red;
 }
 
 .actions__reset-button:active {
