@@ -31,7 +31,7 @@ const Tile: React.FC<ITileProps> = ({ value }) => {
       className={`board__tile ${isAnimationShow ? "board__tile_animate" : ""}`}
       style={{
         backgroundColor: config.colors[value],
-        borderBottom: value === 0 ? null : ".6vh solid #404040",
+        borderBottom: value === 0 ? null : ".6vmin solid #404040",
       }}
     >
       {value !== 0 && value}

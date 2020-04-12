@@ -8,7 +8,7 @@
 }
 
 .done-game-popup__inner {
-  width: 50vh;
+  width: 50vmin;
   box-sizing: border-box;
   padding: 20px;
   background: #fff;
@@ -17,7 +17,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  border-radius: 2vh;
+  border-radius: 2vmin;
 }
 
 .done-game-popup__inner_animation {
@@ -27,14 +27,17 @@
 .done-game-popup__button {
   background-color: red;
   color: white;
-  height: 6vh;
-  font-size: 1.7vh;
+  height: 6vmin;
+  font-size: 1.7vmin;
   font-weight: 900;
 
-  padding: 1vh 2vh;
-  border-radius: 1vh;
-  outline: none;
+  padding: 1vmin 2vmin;
+  border-radius: 1vmin;
   border-bottom: 2px solid rgb(143, 15, 15);
+}
+
+.actions__reset-button:focus {
+  outline-color: red;
 }
 
 .done-game-popup__button:active {
@@ -48,11 +51,5 @@
 
   100% {
     opacity: 1;
-  }
-}
-
-@media (max-aspect-ratio: 1/1) {
-  .done-game-popup__inner {
-    width: 80vw;
   }
 }
