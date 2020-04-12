@@ -15,3 +15,11 @@ const Root: React.FC = () => (
 );
 
 render(<Root />, document.getElementById("root"));
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("./service-worker.js", { scope: "./2048" })
+    .catch((error) => {
+      console.error("register service worker error: ", error);
+    });
+}
